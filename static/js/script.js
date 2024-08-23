@@ -15,13 +15,19 @@ function addNode(parent = document.getElementById("tree-root")) {
 }
 
 function addParentNode(parent) {
+  const showAsTreeBtn = document.querySelector("button[data-tree]");
+  const isTree = showAsTreeBtn.getAttribute("data-tree") === "true";
+  
+  const newUl = document.createElement("ul");
+  const newLi = document.createElement("li");
+
+  isTree ? newUl.classList.add("ul-tree") & newLi.classList.add("li-tree") : null;
+
   const toggleButtons = parent.getElementsByClassName("toggle-button");
   const nearestToggle = toggleButtons.length > 0 ? toggleButtons[0] : null;
   if (nearestToggle && !nearestToggle.classList.contains("collapsed")) {
     nearestToggle.click();
   }
-  const newUl = document.createElement("ul");
-  const newLi = document.createElement("li");
 
   const addNewNode = document.createElement("button");
   addNewNode.textContent = "Add Child Node";
@@ -30,7 +36,7 @@ function addParentNode(parent) {
   const deleteNode = document.createElement("button");
   deleteNode.textContent = "Delete Child Node";
   deleteNode.addEventListener("click", () => {
-    const liNum = newLi.parentNode.getElementsByTagName("li").length;
+    const liNum = newLi.parentNode.children.length;
     if (liNum === 1) {
       newLi.parentNode.parentNode
         .getElementsByClassName("toggle-button")[0]

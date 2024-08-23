@@ -2,6 +2,10 @@
     display: none;
 }
 
+.ul-tree.hide {
+    display: none;
+}
+
 .toggle-button::after {
     content: '+';
 }
