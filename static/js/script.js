@@ -30,9 +30,11 @@ function addParentNode(parent) {
   const deleteNode = document.createElement("button");
   deleteNode.textContent = "Delete Child Node";
   deleteNode.addEventListener("click", () => {
-    const liNum = newLi.parentNode.getElementsByTagName('li').length
-    if(liNum === 1){
-      newLi.parentNode.parentNode.getElementsByClassName('toggle-button')[0].remove()
+    const liNum = newLi.parentNode.getElementsByTagName("li").length;
+    if (liNum === 1) {
+      newLi.parentNode.parentNode
+        .getElementsByClassName("toggle-button")[0]
+        .remove();
       newLi.parentNode.remove();
     } else {
       newLi.remove();
@@ -75,4 +77,19 @@ function showHideAll(event) {
     }
   });
   showHideBtn.setAttribute("data-visible", !isVisible);
+}
+
+function showAsTree(event) {
+  const treeRoot = document.getElementById("tree-root");
+  const showAsTreeBtn = event.target;
+  const isTree = showAsTreeBtn.getAttribute("data-tree") === "true";
+
+  const ulTags = treeRoot.querySelectorAll("ul");
+  const liTags = treeRoot.querySelectorAll("li");
+
+  isTree
+    ? ulTags.forEach(ul=>ul.classList.remove("ul-tree")) & liTags.forEach(li=>li.classList.remove("li-tree"))
+    : ulTags.forEach(ul=>ul.classList.add("ul-tree")) & liTags.forEach(li=>li.classList.add("li-tree"));
+
+    showAsTreeBtn.setAttribute("data-tree", !isTree);
 }

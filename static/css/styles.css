@@ -9,3 +9,99 @@
 .toggle-button.collapsed::after {
     content: '-';
 }
+
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  color: #333;
+  box-sizing: border-box;
+  background-color: #f3f3f3;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ul-tree {
+  padding: 0;
+  display: flex;
+  list-style: none;
+  padding-top: 2.5vh;
+  position: relative;
+  justify-content: center;
+}
+
+.li-tree {
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 2.5vh;
+}
+
+/* draw connectors between parent elements */
+.ul-tree::before {
+  content: "";
+  position: absolute;
+  top: 0vh;
+  left: 50%;
+  border: solid 1px;
+  height: 2.5vh;
+}
+
+.ul-tree:first-child::before {
+  display: none;
+}
+
+/* draw connectors between siblings */
+/* vertical connectors */
+.li-tree::before {
+  content: "";
+  top: 0;
+  left: 50%;
+  height: 2.5vh;
+  position: absolute;
+  border: solid 1px;
+}
+
+/* horizontal connectors */
+.li-tree::after {
+  content: "";
+  top: 0;
+  width: 100%;
+  position: absolute;
+  border-top: solid 1px;
+}
+
+/* remove the horizontal connector for the only child */
+.li-tree:only-child::after {
+  display: none;
+}
+
+/* remove extra left and right horizontal connector */
+.li-tree:first-of-type::after {
+  width: 50%;
+  right: 0;
+}
+
+.li-tree:last-of-type::after {
+  width: 50%;
+  left: 0;
+}
+
+/* remove connectors before only child */
+.li-tree:only-child {
+  padding-top: 0;
+}
+
+.li-tree:only-child::before {
+  display: none;
+}
+
