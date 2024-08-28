@@ -1,5 +1,10 @@
 function addNode(parent = document.getElementById("tree-root")) {
+  const showAsTreeBtn = document.querySelector("button[data-tree]");
+  const isTree = showAsTreeBtn.getAttribute("data-tree") === "true";
+  
   const newLi = document.createElement("li");
+
+  isTree ? parent.classList.add("ul-tree") & newLi.classList.add("li-tree") : null;
 
   const addNewNode = document.createElement("button");
   addNewNode.textContent = "Add Child Node";
@@ -7,7 +12,7 @@ function addNode(parent = document.getElementById("tree-root")) {
 
   const deleteNode = document.createElement("button");
   deleteNode.textContent = "Delete Child Node";
-  deleteNode.addEventListener("click", () => newLi.remove());
+  deleteNode.addEventListener("click", () => newLi.remove() & parent.classList.remove('ul-tree'));
 
   newLi.appendChild(addNewNode);
   newLi.appendChild(deleteNode);
@@ -86,7 +91,7 @@ function showHideAll(event) {
 }
 
 function showAsTree(event) {
-  const treeRoot = document.getElementById("tree-root");
+  const treeRoot = document.getElementById("tree-container");
   const showAsTreeBtn = event.target;
   const isTree = showAsTreeBtn.getAttribute("data-tree") === "true";
 
