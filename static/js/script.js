@@ -1,10 +1,12 @@
 function addNode(parent = document.getElementById("tree-root")) {
   const showAsTreeBtn = document.querySelector("button[data-tree]");
   const isTree = showAsTreeBtn.getAttribute("data-tree") === "true";
-  
+
   const newLi = document.createElement("li");
 
-  isTree ? parent.classList.add("ul-tree") & newLi.classList.add("li-tree") : null;
+  isTree
+    ? parent.classList.add("ul-tree") & newLi.classList.add("li-tree")
+    : null;
 
   const addNewNode = document.createElement("button");
   addNewNode.textContent = "Add Child Node";
@@ -12,7 +14,10 @@ function addNode(parent = document.getElementById("tree-root")) {
 
   const deleteNode = document.createElement("button");
   deleteNode.textContent = "Delete Child Node";
-  deleteNode.addEventListener("click", () => newLi.remove() & parent.classList.remove('ul-tree'));
+  deleteNode.addEventListener("click", () => {
+    newLi.remove();
+    parent.children.length > 3 && parent.classList.remove("ul-tree");
+  });
 
   newLi.appendChild(addNewNode);
   newLi.appendChild(deleteNode);
@@ -22,11 +27,13 @@ function addNode(parent = document.getElementById("tree-root")) {
 function addParentNode(parent) {
   const showAsTreeBtn = document.querySelector("button[data-tree]");
   const isTree = showAsTreeBtn.getAttribute("data-tree") === "true";
-  
+
   const newUl = document.createElement("ul");
   const newLi = document.createElement("li");
 
-  isTree ? newUl.classList.add("ul-tree") & newLi.classList.add("li-tree") : null;
+  isTree
+    ? newUl.classList.add("ul-tree") & newLi.classList.add("li-tree")
+    : null;
 
   const toggleButtons = parent.getElementsByClassName("toggle-button");
   const nearestToggle = toggleButtons.length > 0 ? toggleButtons[0] : null;
@@ -99,8 +106,10 @@ function showAsTree(event) {
   const liTags = treeRoot.querySelectorAll("li");
 
   isTree
-    ? ulTags.forEach(ul=>ul.classList.remove("ul-tree")) & liTags.forEach(li=>li.classList.remove("li-tree"))
-    : ulTags.forEach(ul=>ul.classList.add("ul-tree")) & liTags.forEach(li=>li.classList.add("li-tree"));
+    ? ulTags.forEach((ul) => ul.classList.remove("ul-tree")) &
+      liTags.forEach((li) => li.classList.remove("li-tree"))
+    : ulTags.forEach((ul) => ul.classList.add("ul-tree")) &
+      liTags.forEach((li) => li.classList.add("li-tree"));
 
-    showAsTreeBtn.setAttribute("data-tree", !isTree);
+  showAsTreeBtn.setAttribute("data-tree", !isTree);
 }
